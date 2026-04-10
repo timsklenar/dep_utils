@@ -1,16 +1,17 @@
 #%%
 """A module for the Daily Erosion Project to consolidate file structures, naming conventions and 
-make it easier to run the same scripts on different machines.  First it will pull information 
-from json formatted config files about what drives to use based on the active username and 
-computer name, then populate classes with relavent attributes so that the user can call the default
-value through Class().value or instantiate their own values through my_value = Class(needed,values,go,here).
+make it easier to run the same scripts on different machines.  This top level module consolidates submodules
+into one interface, populates classes with relavent attributes and is structured so that the user can call the default
+value through Class().value or instantiate their own values through my_value = Class(needed,variables,go,here).
 The ideas behind this way of doing it is that the user can write scripts with the default values 
 (pulled from the config files) in mind, but during testing can instantiate objects with different attribute 
-values or even set them directly (e.g. Class.value = "something"). This allows maximum flexibility once the 
-user is done testing the structure, as they can change either a local copy of config files and include the 
-DEP_info.py and the modified files packaged up with the script (changing only the behavior of that script) 
-or they can change the main config file (changing the behavior across all scripts using the DEP default
-config files)."""
+values or even set them directly (e.g. Class.value = "something" or Class._value = "whatever). 
+This allows maximum flexibility once the user is done testing the structure, as they can change either 
+a local copy of config files and include the dep_utils folder and the modified files packaged up with the 
+script they're working on (changing only the behavior of that script) or they can change the values in the main config file 
+(changing the behavior across all scripts using the DEP default config files).  To get the maximum benefit of 
+intellisense type IDE features, put the dep_utils package folder in the site-packages folder of the environement you're
+using (usually lives somewhere like C:\Users\{username}\AppData\Local\ESRI\conda\envs\arcgispro-py3-clone\Lib\site-packages)"""
 
 # import pathlib
 from pathlib import Path
