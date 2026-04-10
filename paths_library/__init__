@@ -1,0 +1,9 @@
+from .user import User
+from .drives import Drives
+
+class PathLibrary:
+    class User(User):
+        "Paths and info for the current user on current computer"
+    class Drives(Drives):
+        "The default processing drives for the current user for each DEP computer"
+
