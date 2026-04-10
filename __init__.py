@@ -31,7 +31,7 @@ from paths_library import PathLibrary
 from paths_library.drives import Drives
 from paths_library.user import User
 from paths_library.computers import Computers
-
+from paths_library.datasets import Datasets,Dataset
 
 # class Management:
 #     _acpf='Man_Data_ACPF\\dep_ACPF'
@@ -62,14 +62,17 @@ class DEP:
         "The default processing drives for the current user for each DEP computer"
     class User(User):
         "Paths and info for the current user on current computer" 
-    # class Dataset(Dataset):
-    #     "Paths to datasets"
-    #     class BaseData(BaseData):
-            # class Midwest(Midwest):
-            #     class HUC12(Midwest):
-            #         def __init__(self, year: int | None = None,versioning_string: str | None=None):
-            #             super().__init__(year)
-            #             self.path=Path(BaseData().path)/self.HUC12
+    class Datasets(Datasets):
+        "Paths to datasets"
+    class Dataset(Dataset):
+        "A dataset object with the path initialization method to add a verson string"
+    
+        # class BaseData(BaseData):
+        #     class Midwest(Midwest):
+        #         class HUC12(Midwest):
+        #             def __init__(self, year: int | None = None,versioning_string: str | None=None):
+        #                 super().__init__(year)
+        #                 self.path=Path(BaseData().path)/self.HUC12
 
     # class Tools(Tools):
         # "Daily Erosion Project custom functions"  

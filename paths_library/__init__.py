@@ -1,11 +1,15 @@
+#%%
+from pathlib import Path
 from .user import User
 from .drives import Drives
 from .computers import Computers
-from .datasets import Dataset,BaseData,ACPF,OtherManagements
+from .datasets import Datasets,Dataset,BaseData,ACPF,OtherManagements
+# from .path_initialization import path_initialization
+
 
 class PathLibrary:
-    class Dataset(Dataset):
-        
+    class Datasets(Datasets):
+        "DEP dataset paths"
     class Computers(Computers):
         "All the DEP computers in one"
     class User(User):
@@ -13,3 +17,4 @@ class PathLibrary:
     class Drives(Drives):
         "The default processing drives for the current user for each DEP computer"
 
+#%%
