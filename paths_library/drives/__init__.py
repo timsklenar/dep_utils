@@ -2,7 +2,7 @@
 from pathlib import Path
 import platform
 import json
-from ...defaults import Defaults
+from defaults import Defaults
 # """computer name"""
 # current_computer=platform.node()
 # # Get the directory of the current script

@@ -1,7 +1,7 @@
 import platform
 from pathlib import Path
 import json
-from ...defaults import Defaults
+from defaults import Defaults
 # base_dir = Path(__file__).parent.parent
 
 # # Access a file in a 'data' folder next to the script
