@@ -65,8 +65,10 @@ class DEP:
     class Datasets(Datasets):
         "Paths to datasets"
     class Dataset(Dataset):
-        "A dataset object with the path initialization method to add a verson string"
-    
+        "A Daily Erosion Project basic dataset path object with path_initialization method to make the path object "
+        "and to add a verson string after an underscore. Used as a base class for specific dataset paths (acpf, basedata, etc),"
+        "but can be used to make any string into a path object. Best not to use spaces for the version string"
+        
         # class BaseData(BaseData):
         #     class Midwest(Midwest):
         #         class HUC12(Midwest):

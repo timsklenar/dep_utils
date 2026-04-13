@@ -1,39 +1,61 @@
 import datetime
+from pathlib import Path
 class BasicParameters:
     "static DEP data"
     
     _year=int(datetime.date.today().year)
-    _HUC12 = f'MW_HUC12_v'
-    _HUC8 = f'MW_HUC8_v'
-    _HUC2= f'MW_HUC2_v'
-    def __init__(self,year: int|None=None):
+    _MW_HUC12 = f'MW_HUC12_v'
+    _MW_HUC8 = f'MW_HUC8_v'
+    _MW_HUC2= f'MW_HUC2_v'
+    _huc12="070801050307" #watershed with ISU and areas W/SW ames iowa 
+    def __init__(self,year: int|None=None,huc12:str|None=None):
+        
+        if huc12 == None:
+            self.huc12=self._huc12
+        
+        elif not isinstance(huc12,str) or len(huc12)!=12:
+            raise TypeError(f"{self.__class__.__name__} huc12 must be a string with 12 numerical digits")
+        else:
+            self.huc12=huc12
+
+
+        self.huc8=self.huc12[:8]
+
+        self.huc8_path=Path(self.huc8)
+        self.huc12_path=Path(self.huc12)
+        self.huc_folder_path=self.huc8_path/self.huc12_path
+        
         if year==None:
             self.year=self._year
-            self.HUC12=f"{self._HUC12}{self._year}"
-            self.HUC8=f"{self._HUC8}{self._year}"
-            self.HUC2=f"{self._HUC2}{self._year}"
+            self.MW_HUC12=f"{self._MW_HUC12}{self.year}"
+            self.MW_HUC8=f"{self._MW_HUC8}{self.year}"
+            self.MW_HUC2=f"{self._MW_HUC2}{self.year}"
+        
+        elif not isinstance(year,int):
+            raise TypeError(f"{self.__class__.__name__} year must be a integer or None (defaults to current year)")
         
         else:
+            self.year=year
             if year>2023:
-                self.HUC12=f"{self._HUC12}{self._year}"
-                self.HUC8=f"{self._HUC8}{self._year}"
-                self.HUC2=f"{self._HUC2}{self._year}"
+                self.MW_HUC12=f"{self._MW_HUC12}{self.year}"
+                self.MW_HUC8=f"{self._MW_HUC8}{self.year}"
+                self.MW_HUC2=f"{self._MW_HUC2}{self.year}"
             elif year==2023:
-                self.HUC12=f"{self._HUC12}{year}"
-                self.HUC8=f"{self._HUC8}{year}"
-                self.HUC2=f"{self._HUC2}{year-1}"
+                self.MW_HUC12=f"{self._MW_HUC12}{self.year}"
+                self.MW_HUC8=f"{self._MW_HUC8}{self.year}"
+                self.MW_HUC2=f"{self._MW_HUC2}{self.year-1}"
             elif year==2022:
-                self.HUC12=f"{self._HUC12}2022"
-                self.HUC8=f"{self._HUC8}2022"
-                self.HUC2=f"{self._HUC2}2022"
+                self.MW_HUC12=f"{self._MW_HUC12}2022"
+                self.MW_HUC8=f"{self._MW_HUC8}2022"
+                self.MW_HUC2=f"{self._MW_HUC2}2022"
             elif 2021>=year>=2019:
-                self.HUC12=f"{self._HUC12}2019"
-                self.HUC8=f"{self._HUC8}2019"
-                self.HUC2=f"{self._HUC2}2019"
+                self.MW_HUC12=f"{self._MW_HUC12}2019"
+                self.MW_HUC8=f"{self._MW_HUC8}2019"
+                self.MW_HUC2=f"{self._MW_HUC2}2019"
             else:
-                self.HUC12=f"{self._HUC12}2013"
-                self.HUC8=f"{self._HUC8}2013"
-                self.HUC2=f"{self._HUC2}2013"
+                self.MW_HUC12=f"{self._MW_HUC12}2013"
+                self.MW_HUC8=f"{self._MW_HUC8}2013"
+                self.MW_HUC2=f"{self._MW_HUC2}2013"
     
     
     class DEM_method:

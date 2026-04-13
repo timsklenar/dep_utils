@@ -4,7 +4,8 @@ from pathlib import Path
 # from ...paths_library import path_initialization
 
 class Dataset:
-    "A Daily Erosion Project dataset object"
+    "A Daily Erosion Project basic dataset path object with path_initialization method to make the path object and to add a verson string after an underscore. Used as a base class for specific dataset paths (acpf, basedata, etc), but can be used to make any string into a path object. Best not to use spaces for the version string"
+   
     _path=None
     # def path_inititalization(path_initializatio):
     def path_initialization(self,path_variable:str|Path|None=None,version_string:str|None=None):
