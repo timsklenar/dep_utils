@@ -1,6 +1,86 @@
+# from .legacy
 
 
+class ToolsLibrary:
     
+    class Legacy:
+        from .legacy.dem_functions import addMetadata as addMetadata
+        from .legacy.dem_functions import channelized_areas as channelized_areas
+        from .legacy.dem_functions import getHucSelection as getHucSelection
+        from .legacy.dem_functions import MakeCatchList as MakeCatchList
+        from .legacy.dem_functions import defineLocalProc as defineLocalProc
+        from .legacy.dem_functions import updateResolution as updateResolution
+        from .legacy.dem_functions import try_to_delete as try_to_delete
+        from .legacy.dem_functions import createBasicDirectories as createBasicDirectories
+        from .legacy.dem_functions import loadInterpDict as loadInterpDict
+        from .legacy.dem_functions import loadBasicVariablesDict as loadBasicVariablesDict
+        from .legacy.dem_functions import loadVariablesDict as loadVariablesDict
+        from .legacy.dem_functions import loadFieldNames as loadFieldNames
+        from .legacy.dem_functions import nukedir as nukedir
+        from .legacy.dem_functions import loadHucs as loadHucs
+        from .legacy.dem_functions import setupLoggingNoCh as setupLoggingNoCh
+        from .legacy.dem_functions import setupLoggingSimple as setupLoggingSimple
+        from .legacy.dem_functions import setupLoggingNew as setupLoggingNew
+        from .legacy.dem_functions import setupLogging as setupLogging
+        from .legacy.dem_functions import MakeHUClist as MakeHUClist
+        from .legacy.dem_functions import tryAddField as tryAddField
+        from .legacy.dem_functions import figureItOut as figureItOut
+        from .legacy.dem_functions import splitall as splitall
+        from .legacy.dem_functions import condenseStats as condenseStats
+        from .legacy.dem_functions import testForZero as testForZero
+        from .legacy.dem_functions import ZonalStatistics as ZonalStatistics
+        from .legacy.dem_functions import ZeroFeaturesError as ZeroFeaturesError
+        from .legacy.dem_functions import tno as tno
+        from .legacy.dem_functions import calcTop1Distinct as calcTop1Distinct
+        from .legacy.dem_functions import intersectingFeaturesUniqueIteration4 as intersectingFeaturesUniqueIteration4
+        from .legacy.dem_functions import addCalcJoin as addCalcJoin
+        from .legacy.dem_functions import getfields as getfields
+        from .legacy.dem_functions import buildSelection as buildSelection
+        from .legacy.dem_functions import buildAndSelection as buildAndSelection
+        from .legacy.dem_functions import buildStringSelection as buildStringSelection
+        from .legacy.dem_functions import buildAntiSelection as buildAntiSelection
+        from .legacy.dem_functions import selectByList as selectByList
+        from .legacy.dem_functions import antiSelectByList as antiSelectByList
+        from .legacy.dem_functions import conByList as conByList
+        from .legacy.dem_functions import copyfc as copyfc
+        from .legacy.dem_functions import copyfc2 as copyfc2
+        from .legacy.dem_functions import copytbl as copytbl
+        from .legacy.dem_functions import copytbl2 as copytbl2
+        from .legacy.dem_functions import condDelete as condDelete
+        from .legacy.dem_functions import getFrsAsList as getFrsAsList
+        from .legacy.dem_functions import create_needed_dirs_and_gdbs as create_needed_dirs_and_gdbs
+        from .legacy.dem_functions import CreateInitialWs as CreateInitialWs
+        from .legacy.dem_functions import findMaxDepth as findMaxDepth
+        from .legacy.dem_functions import punchHolesByDepth4 as punchHolesByDepth4
+        from .legacy.dem_functions import condenseDataLvls as condenseDataLvls
+        from .legacy.dem_functions import condenseTableLvls as condenseTableLvls
+        from .legacy.dem_functions import angleDif as angleDif
+        from .legacy.dem_functions import curvatureBasedStreams as curvatureBasedStreams
+        from .legacy.dem_functions import pruneStreamByLength as pruneStreamByLength
+        from .legacy.dem_functions import overflowFRs as overflowFRs
+        from .legacy.dem_functions import stationLines10 as stationLines10
+        from .legacy.dem_functions import makeTPI as makeTPI
+        from .legacy.dem_functions import expandByFst as expandByFst
+        from .legacy.dem_functions import createInvertDEM as createInvertDEM
+        from .legacy.dem_functions import getFenceEl as getFenceEl
+        from .legacy.dem_functions import setupInversionZones as setupInversionZones
+        from .legacy.dem_functions import fixByInversion as fixByInversion
+        from .legacy.dem_functions import fixByInversionByPath as fixByInversionByPath
+        from .legacy.dem_functions import createInvertAndExpand as createInvertAndExpand
+        from .legacy.dem_functions import calcDsFd as calcDsFd
+        from .legacy.dem_functions import fullZoneByZs as fullZoneByZs
+        from .legacy.dem_functions import rescaleExtent as rescaleExtent
+        from .legacy.dem_functions import wait_for_timeout as wait_for_timeout
+        from .legacy.dem_functions import printParameters as printParameters
+        from .legacy.dem_functions import joinDict as joinDict
+        from .legacy.dem_functions import visualizeExtent as visualizeExtent
+        from .legacy.dem_functions import cleanupOther as cleanupOther
+        from .legacy.dem_functions import getMetadata as getMetadata
+        from .legacy.dem_functions import copy_text_line_by_line as copy_text_line_by_line
+        from .legacy.dem_functions import test_parameters as test_parameters
+        from .legacy.dem_functions import prep_arguments_text as prep_arguments_text
+
+
 # class Basics:
 #             _results=dict()
 #             def __init__(self,ACPFyear, node=DEP.Computers.Remote.Cylo.Main, uversion = None):

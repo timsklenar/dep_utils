@@ -32,7 +32,17 @@ from paths_library.drives import Drives
 from paths_library.user import User
 from paths_library.computers import Computers
 from paths_library.datasets import Datasets,Dataset
+from tools_library import ToolsLibrary
 import inspect
+
+BasicParameters()
+Defaults()
+PathLibrary()
+Drives()
+User()
+Computers()
+# Datasets()
+
 
 # class Management:
 #     _acpf='Man_Data_ACPF\\dep_ACPF'
@@ -53,6 +63,7 @@ import inspect
 #                 cls.path=    
 
 def append_version_string(pathlike:str|Path|None=None,version_string:str|None=None):
+    "converts a paths to strings, combines with version_string and turns back into a path"
     if version_string==None:
             version_string=""
     elif not isinstance(version_string,str):
@@ -64,15 +75,23 @@ def append_version_string(pathlike:str|Path|None=None,version_string:str|None=No
     
     
     return Path(f"{pathlike}{version_string}")
+
+
 class DEP:
     "a big ol' meta class to bring all the other classes into one spot"
-    _processing_directory=User.drive/"DEP_Proc"
-    _base=User.drive/"DEP"
+    _processing_directory=User.drive/Defaults._processing_dir
+    _directory=User.drive/Defaults._DEP_dir
 
     def __init__(self,version_string:str|None=None):
-        
-        self.path=Path(f"{str(self._base)}{version_string}")
-       
+        # if version_string == None:
+
+        #     self.path=Path(f"{str(self._base)}")
+        #     self.proc=P
+           
+        self.path=append_version_string(pathlike=self._directory,version_string=version_string)#Path(f"{str(self._base)}{version_string}")
+        self.proc=append_version_string(pathlike=self._processing_directory,version_string=version_string)
+    class ToolsLibrary(ToolsLibrary):
+        "DEP tools"
     class BasicParameters(BasicParameters):
         "Basic parameters used in the DEP including huc12 lists from different years and Default values for configuration"
         class Defaults(Defaults):

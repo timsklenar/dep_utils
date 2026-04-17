@@ -27,6 +27,11 @@ for computer,users in raw_defaults_dict.items():
 
 del computer,users,user,drive
 
+def turn_warnings_off(self):
+    self.__class__._warnings_flag=False
+def turn_warnings_on(self):
+    self.__class__._warnings_flag=True
+
 class Defaults:
     _user_drives_dict=drive_defaults_dict
     _acpf_year=2023

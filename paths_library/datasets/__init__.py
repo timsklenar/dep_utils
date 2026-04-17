@@ -5,6 +5,7 @@ from basic_parameters import BasicParameters
 import inspect
 from paths_library.computers import Cylo
 from defaults import Defaults
+from defaults import turn_warnings_on,turn_warnings_off
 # from ...paths_library import path_initialization
 
 class Dataset:
@@ -42,6 +43,10 @@ class BaseData(Dataset):
     _drive_path=Path("")
     _folder_path=Path('Basedata_Summaries')
     _path=_drive_path/_folder_path
+    _warnings_flag=True
+
+    from defaults import turn_warnings_off as turn_warnings_off
+    from defaults import turn_warnings_on as turn_warnings_on
 
     def __init__(self, dir_path: str | Path | None = None, version_string=None):
         super().__init__(dir_path, version_string)
@@ -58,7 +63,11 @@ class OtherManagements(Dataset):
     _drive_path=Path("")
     _folder_path=Path('Man_Data_Other')
     _path=_drive_path/_folder_path
-    
+    _warnings_flag=True
+
+    from defaults import turn_warnings_off as turn_warnings_off
+    from defaults import turn_warnings_on as turn_warnings_on
+
     # def __init__(self,version_string=None):
     #     super().__init__(self._path,version_string)
     #     # super().path_initialization(self._path,version_string)
@@ -70,15 +79,17 @@ class ACPF(Dataset):
     _year=str(Defaults._acpf_year)
     _acpf_year_folder=Path(f"dep_ACPF{_year}")
     _path=_drive_path/_folder_path/_acpf_year_folder
-    
+    _warnings_flag=True
+
+    from defaults import turn_warnings_off as turn_warnings_off
+    from defaults import turn_warnings_on as turn_warnings_on
+
     
     def __init__(self, year:int|str|None=None, 
                  dir_path: str | Path | None = None, 
                  version_string:str|None=None):
         
-        print(self._year)
-        print(year)
-
+        
         if year == None:
             self.year=self._year
         elif not isinstance(year,int|str):
@@ -86,14 +97,14 @@ class ACPF(Dataset):
         else:
             self.year=year
         
-        print(self.year)
-        print(year)
 
         self.acpf_year_folder=Path(f"dep_ACPF{self.year}")
         
-        print(self.acpf_year_folder)
+        if self._warnings_flag==True:
+            print(self.acpf_year_folder)
+        
         if dir_path == None:
-            dir_path=self._path
+            dir_path=self._drive_path/self._folder_path/self.acpf_year_folder
         elif not isinstance(dir_path,str|Path):
             raise TypeError(f"{self.__class__.__name__} dir_path not string or pathlib.Path type") 
         else: 
@@ -129,21 +140,49 @@ class ACPF(Dataset):
 class Datasets:
     "instantiating Datasets(path/to/somewhere) sets the ._path default of the contained datasets to the path provided "
     _drive_path=Cylo.Main.path
+    _init_flag=False
+    _warnings_flag=True
+
+    from defaults import turn_warnings_off as turn_warnings_off
+    from defaults import turn_warnings_on as turn_warnings_on
+    
     class ACPF(ACPF):
         "acpf filepath piece"
+        def __init__(self, year: int | str | None = None, dir_path: str | Path | None = None, version_string: str | None = None):
+            super().__init__(year, dir_path, version_string)
+        # def __init__(self,drive_path: Path|str|None=None):
+        #     if drive_path==None:
+        #         dir_path=Datasets._drive_path/self._folder_path
+        #     elif isinstance(drive_path,str|Path):
+        #         dir_path=drive_path/self._folder_path
+        #     else:
+        #         raise TypeError((f"{self.__class__.__name__} drive_path must be string, pathlib.Path or None type (for default Cylo path)")  )
+        #     super().__init__(dir_path=dir_path)
     class BaseData(BaseData):
         "basedata filepath piece"
+        def __init__(self, dir_path: str | Path | None = None, version_string=None):
+            super().__init__(dir_path, version_string)
     class OtherManagements(OtherManagements):
         "other management filepath piece"
+        def __init__(self, dir_path: str | Path | None = None, version_string=None):
+            super().__init__(dir_path, version_string)
 
-    def set_default_dataset_path(self,drive_path: str|Path|None=None):
-            
-            if isinstance(drive_path,Path) or isinstance(drive_path,str):
-                for name, cls in inspect.getmembers(self):
-                        if inspect.isclass(cls) and issubclass(cls,Dataset):
-                            cls._path=drive_path/cls._path
+    def set_default_dataset_drive(self,drive_path: str|Path|None=None,warning_flag:bool|None=None):
+            # print(drive_path)
+            if drive_path==None:
+                self.drive_path=self._drive_path
+            elif isinstance(drive_path,Path|str):
+                self.drive_path=drive_path
             else:
                 raise TypeError(f"{self.__class__.__name__} drive_path must be string, pathlib.Path or None type (for default Cylo path)")  
+            if warning_flag==None:
+                warning_flag=self._warnings_flag
+            
+            if warning_flag == True:
+                print(f"Datasets drive set to {self.drive_path} as default. To change use Datasets().set_default_dataset_drive('path/to/somewhere')")
+            ACPF._drive_path=Path(self.drive_path)
+            OtherManagements._drive_path=Path(self.drive_path)
+            BaseData._drive_path=Path(self.drive_path)
     
     # def init_dataset_paths(self,drive_path: str|Path|None=None):
             
@@ -154,14 +193,22 @@ class Datasets:
     #         else:
     #             raise TypeError(f"{self.__class__.__name__} drive_path must be string, pathlib.Path or None type (for default Cylo path)")  
 
-    def __init__(self,drive_path: str|Path|None=None):
-            if drive_path == None:
-                drive_path=self._drive_path
-            elif not isinstance(drive_path,str|Path):
-                raise TypeError(f"{self.__class__.__name__} drive_path must be string, pathlib.Path or None type (for default Cylo path)")  
-            else:
-                self.drive_path=drive_path
-                print(self.drive_path)
-            self.set_default_dataset_path(drive_path)
-   
+    def __init__(self,drive_path: str|Path|None=None,warning_flag:bool|None=None):
+            if self._init_flag==False:
+                if drive_path == None:
+                    self.drive_path=self._drive_path
+                elif not isinstance(drive_path,str|Path):
+                    raise TypeError(f"{self.__class__.__name__} drive_path must be string, pathlib.Path or None type (for default Cylo path)")  
+                else:
+                    self.drive_path=drive_path
+                if warning_flag==None:
+                    warning_flag=self._warnings_flag
+                elif not isinstance(warning_flag,bool):
+                    raise TypeError(f"{self.__class__.__name__} warning_flag must be None type (for default) or boolean")  
+                # print(self.drive_path)
+                
+                self.set_default_dataset_drive(self.drive_path,warning_flag=warning_flag)
+                Datasets._init_flag=True
+                # print(f"Datasets drive set to {self.drive_path} as default. To change use Datasets().set_default_dataset_drive('path/to/somewhere')")
+            
 #%%
