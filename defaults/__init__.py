@@ -29,4 +29,7 @@ del computer,users,user,drive
 
 class Defaults:
     _user_drives_dict=drive_defaults_dict
+    _acpf_year=2023
+    _processing_dir="DEP_Proc"
+    _DEP_dir="DEP"
     

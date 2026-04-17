@@ -5,7 +5,7 @@ class Cylo:
     ## "data storage server managed by Ryan McGeehee"
     class Main:
         "main DEP data repository, read only except for managers (bkgelder)"
-        path=Path("\\\\abe-cylo\\dep")
+        path=Path("\\\\abe-cylo\\dep\\DEP")
     class Dev:
         "DEP development directory, read and write enabled for DEP team members"
         path=Path("\\\\abe-cylo\\depdev")
