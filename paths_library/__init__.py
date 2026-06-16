@@ -1,6 +1,6 @@
 #%%
 from pathlib import Path
-from defaults import Defaults
+from ..defaults import Defaults
 from .user import User
 from .drives import Drives
 from .computers import Computers
